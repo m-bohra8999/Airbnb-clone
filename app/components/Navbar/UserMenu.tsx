@@ -1,89 +1,84 @@
-'use client';
-import { useCallback, useState } from 'react';
-import { AiOutlineMenu } from 'react-icons/ai';
+"use client"
 
-import MenuItem from './MenuItem';
-import Avatar from '../Avatar';
+import { useCallback, useState } from "react"
+import { AiOutlineMenu } from "react-icons/ai"
+
+import useRegisterModal from "@/app/hooks/useRegisterModal"
+
+import Avatar from "../Avatar"
+import MenuItem from "./MenuItem"
 
 const UserMenu: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const registerModal = useRegisterModal()
+  const [isOpen, setIsOpen] = useState(false)
 
   const toggleOpen = useCallback(() => {
-    setIsOpen((value) => !value);
-  }, []);
+    setIsOpen((value) => !value)
+  }, [])
 
   return (
-    <div className='relative'>
-      <div className='flex flex-row items-center gap-3'>
+    <div className="relative">
+      <div className="flex flex-row items-center gap-3">
         <div
           onClick={() => {}}
-          className='
-            hidden
-            md:block
-            text-sm 
-            font-semibold 
-            py-3 
-            px-4 
-            rounded-full 
-            hover:bg-neutral-100 
-            transition 
-            cursor-pointer
-          '
+          className="hidden cursor-pointer rounded-full px-4 py-3 text-sm font-semibold transition  hover:bg-neutral-100 md:block"
         >
           Airbnb your home
         </div>
         <div
           onClick={toggleOpen}
-          className='
-          p-4
-          md:py-1
-          md:px-2
-          border-[1px] 
-          border-neutral-200 
-          flex 
-          flex-row 
+          className="
+          flex
+          cursor-pointer
+          flex-row
           items-center 
           gap-3 
           rounded-full 
-          cursor-pointer 
+          border-[1px] 
+          border-neutral-200 
+          p-4 
+          transition 
           hover:shadow-md 
-          transition
-          '
+          md:px-2 
+          md:py-1
+          "
         >
           <AiOutlineMenu />
-          <div className='hidden md:block'>
-            <Avatar src={'/images/placeholder.png'} />
+          <div className="hidden md:block">
+            <Avatar src={"/images/placeholder.png"} />
           </div>
         </div>
       </div>
       {isOpen && (
         <div
-          className='
+          className="
             absolute 
-            rounded-xl 
-            shadow-md
-            w-[40vw]
-            md:w-3/4 
-            bg-white 
-            overflow-hidden 
             right-0 
-            top-12 
-            text-sm
-          '
+            top-12
+            w-[40vw]
+            overflow-hidden 
+            rounded-xl 
+            bg-white 
+            text-sm 
+            shadow-md 
+            md:w-3/4
+          "
         >
-          <div className='flex flex-col cursor-pointer'>
-            <MenuItem label='My trips' onClick={() => {}} />
-            <MenuItem label='My favorites' onClick={() => {}} />
-            <MenuItem label='My reservations' onClick={() => {}} />
-            <MenuItem label='My properties' onClick={() => {}} />
-            <MenuItem label='Airbnb your home' onClick={() => {}} />
+          <div className="flex cursor-pointer flex-col">
+            <MenuItem label="Login" onClick={() => {}} />
+            <MenuItem label="Sign up" onClick={registerModal.onOpen} />
+            <MenuItem label="My trips" onClick={() => {}} />
+            <MenuItem label="My favorites" onClick={() => {}} />
+            <MenuItem label="My reservations" onClick={() => {}} />
+            <MenuItem label="My properties" onClick={() => {}} />
+            <MenuItem label="Airbnb your home" onClick={() => {}} />
             <hr />
-            <MenuItem label='Logout' onClick={() => {}} />
+            <MenuItem label="Logout" onClick={() => {}} />
           </div>
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default UserMenu;
+export default UserMenu
